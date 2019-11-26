@@ -17,13 +17,17 @@ class Soundboard:
     with open('assets/data/soundmap.json', 'r') as file:
       soundMap = json.load(file)
 
-    soundDir = soundMap['soundDir']
+    self.soundDir = soundMap['soundDir']
     for soundSet in soundMap['sets']:
       self.sets.append( SoundSet(soundSet) )
 
     for soundSet in self.sets:
-      print( soundSet.name + ' ' + str(len(soundSet.soundKeys)) );
+      print( soundSet.name + ' ' + str(len(soundSet.soundKeys)) )
 
   def playSound( self, filename ): 
-    sound = AudioSegment.from_wav( soundDir + filename );
+    if '.wav' in filename:
+      sound = AudioSegment.from_wav( self.soundDir + filename )
+    else:
+      sound = AudioSegment.from_mp3( self.soundDir + filename )
+
     play( sound )
