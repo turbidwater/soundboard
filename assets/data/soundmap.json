@@ -1,0 +1,22 @@
+{
+  "soundDir": "assets/sounds/",
+  "sets": [
+    { 
+      "name": "Dad",
+      "sounds": [
+        {
+          "name": "Awooga",
+          "key": "q",
+          "file": "awooga.mp3"
+        },
+        {
+          "name": "AwoogaWav",
+          "key": "w",
+          "file": "awooga.wav"
+        }
+      ]
+    },
+    { "name": "Farts", "sounds": []},
+    { "name": "Robots", "sounds": []}
+  ]  
+}
