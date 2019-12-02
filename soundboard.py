@@ -4,14 +4,21 @@ from models.soundset import SoundSet, SoundKey
 from camelcase import CamelCase
 from pydub import AudioSegment
 from pydub.playback import play
+import keyboard
 
 class Soundboard:
   soundDir = ''
-  sets = [];
+  sets = []
+  currentSetIndex = 0
 
   def __init__(self):
-    print('Soundboard initialized')
     self.loadSoundMap()
+    print('Soundboard initialized')
+    self.addListeners()
+
+  def addListeners(self):
+    keyboard.add_hotkey( 'ctrl+z', lambda: self.changeSet(-1) )
+    keyboard.add_hotkey( 'ctrl+x', lambda: self.changeSet(1) )
 
   def loadSoundMap(self):
     with open('assets/data/soundmap.json', 'r') as file:
@@ -21,13 +28,36 @@ class Soundboard:
     for soundSet in soundMap['sets']:
       self.sets.append( SoundSet(soundSet) )
 
-    for soundSet in self.sets:
-      print( soundSet.name + ' ' + str(len(soundSet.soundKeys)) )
+    self.loadSoundSet(self.sets[self.currentSetIndex])
+
+  def loadSoundSet( self, soundSet ):
+    print( 'loading ' + soundSet.name )
+    self.playSound( self.soundDir + 'loading.mp3' )
+    self.playSound( self.buildFileName(soundSet.name, soundSet.name + '.mp3'))
+    for sound in soundSet.soundKeys:
+      # keyboard.add_hotkey(sound.key, lambda: self.playSound( self.buildFileName(soundSet.name, sound.file)))
+      keyboard.add_hotkey(sound.key, lambda: print(sound.file))
+
+  def changeSet( self, dir ):
+    self.unloadSoundSet()
+    self.currentSetIndex += dir
+    if (self.currentSetIndex < 0):
+      self.currentSetIndex = len(self.sets) - 1
+    elif (self.currentSetIndex >= len(self.sets)):
+      self.currentSetIndex = 0
+
+    self.loadSoundSet( self.sets[self.currentSetIndex] )
+
+  def unloadSoundSet(self):
+    keyboard.remove_all_hotkeys()
+
+  def buildFileName( self, setName, filename ):
+    return self.soundDir + setName + '/' + filename
 
   def playSound( self, filename ): 
     if '.wav' in filename:
-      sound = AudioSegment.from_wav( self.soundDir + filename )
+      sound = AudioSegment.from_wav(filename)
     else:
-      sound = AudioSegment.from_mp3( self.soundDir + filename )
+      sound = AudioSegment.from_mp3(filename)
 
     play( sound )

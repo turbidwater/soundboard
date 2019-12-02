@@ -6,13 +6,33 @@
       "sounds": [
         {
           "name": "Awooga",
-          "key": "q",
+          "key": "a",
           "file": "awooga.mp3"
         },
         {
-          "name": "AwoogaWav",
+          "name": "Wak",
           "key": "w",
-          "file": "awooga.wav"
+          "file": "wak.mp3"
+        }
+      ]
+    },
+    { 
+      "name": "AltDad",
+      "sounds": [
+        {
+          "name": "Awooga",
+          "key": "w",
+          "file": "awooga.mp3"
+        },
+        {
+          "name": "Wak",
+          "key": "a",
+          "file": "wak.mp3"
+        },
+        {
+          "name": "Dad",
+          "key": "d",
+          "file": "Dad.mp3"
         }
       ]
     },
