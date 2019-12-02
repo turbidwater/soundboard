@@ -11,14 +11,17 @@ class Soundboard:
   sets = []
   currentSetIndex = 0
 
+
   def __init__(self):
     self.loadSoundMap()
     print('Soundboard initialized')
     self.addListeners()
 
+
   def addListeners(self):
-    keyboard.add_hotkey( 'ctrl+z', lambda: self.changeSet(-1) )
-    keyboard.add_hotkey( 'ctrl+x', lambda: self.changeSet(1) )
+    keyboard.add_hotkey( 'shift+z', lambda: self.changeSet(-1) )
+    keyboard.add_hotkey( 'shift+x', lambda: self.changeSet(1) )
+
 
   def loadSoundMap(self):
     with open('assets/data/soundmap.json', 'r') as file:
@@ -30,13 +33,19 @@ class Soundboard:
 
     self.loadSoundSet(self.sets[self.currentSetIndex])
 
+
   def loadSoundSet( self, soundSet ):
     print( 'loading ' + soundSet.name )
     self.playSound( self.soundDir + 'loading.mp3' )
     self.playSound( self.buildFileName(soundSet.name, soundSet.name + '.mp3'))
     for sound in soundSet.soundKeys:
-      # keyboard.add_hotkey(sound.key, lambda: self.playSound( self.buildFileName(soundSet.name, sound.file)))
-      keyboard.add_hotkey(sound.key, lambda: print(sound.file))
+      keyboard.add_hotkey(sound.key, self.playSound, args=[self.buildFileName(soundSet.name, sound.file)]) 
+
+
+  def unloadSoundSet(self):
+    keyboard.remove_all_hotkeys()
+    self.addListeners()
+
 
   def changeSet( self, dir ):
     self.unloadSoundSet()
@@ -48,11 +57,10 @@ class Soundboard:
 
     self.loadSoundSet( self.sets[self.currentSetIndex] )
 
-  def unloadSoundSet(self):
-    keyboard.remove_all_hotkeys()
 
   def buildFileName( self, setName, filename ):
     return self.soundDir + setName + '/' + filename
+
 
   def playSound( self, filename ): 
     if '.wav' in filename:

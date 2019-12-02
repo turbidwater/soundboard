@@ -35,8 +35,6 @@
           "file": "Dad.mp3"
         }
       ]
-    },
-    { "name": "Farts", "sounds": []},
-    { "name": "Robots", "sounds": []}
+    }
   ]  
 }
