@@ -31,7 +31,7 @@ class Soundboard:
 
 
   def loadSoundMap(self):
-    with open('assets/data/soundmap.json', 'r') as file:
+    with open('./assets/data/soundmap.json', 'r') as file:
       soundMap = json.load(file)
 
     self.soundDir = soundMap['soundDir']
