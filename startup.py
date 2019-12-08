@@ -1,6 +1,7 @@
 from soundboard import Soundboard
 import keyboard
 import threading
+import os
 
 
 sound = Soundboard()
@@ -18,7 +19,7 @@ def main():
   thread = threading.Thread(target=listenForKeys)
   thread.start()
   programEndRequested.wait()
-  sound.playSound('assets/sounds/goodbye.mp3')
+  sound.playSound(os.path.dirname(os.path.realpath(__file__)) + '/assets/sounds/goodbye.mp3')
 
 if __name__ == '__main__':
   main()

@@ -5,8 +5,10 @@ from camelcase import CamelCase
 from pydub import AudioSegment
 from pydub.playback import play
 import keyboard
+import os
 
 class Soundboard:
+  scriptDir = ''
   soundDir = ''
   sets = []
   currentSetIndex = 0
@@ -17,6 +19,8 @@ class Soundboard:
 
 
   def __init__(self):
+    self.scriptPath = os.path.dirname(os.path.realpath(__file__)) + '/'
+    print(self.scriptPath)
     self.loadSoundMap()
     print('Soundboard initialized')
     self.addListeners()
@@ -32,10 +36,10 @@ class Soundboard:
 
 
   def loadSoundMap(self):
-    with open('./assets/data/soundmap.json', 'r') as file:
+    with open(self.scriptPath + 'assets/data/soundmap.json', 'r') as file:
       soundMap = json.load(file)
 
-    self.soundDir = soundMap['soundDir']
+    self.soundDir = self.scriptPath + soundMap['soundDir']
     for soundSet in soundMap['sets']:
       self.sets.append( SoundSet(soundSet) )
 
