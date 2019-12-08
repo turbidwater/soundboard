@@ -10,8 +10,9 @@ programEndRequested = threading.Event()
 def listenForKeys():
   keyboard.on_release_key('enter', endProgram )
 
-def endProgram(self):
-  programEndRequested.set()
+def endProgram(keyboardEvent):
+  if (keyboard.is_pressed('ctrl')): 
+    programEndRequested.set()
 
 def main():
   thread = threading.Thread(target=listenForKeys)

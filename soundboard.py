@@ -10,6 +10,10 @@ class Soundboard:
   soundDir = ''
   sets = []
   currentSetIndex = 0
+  volumeModifier = 5
+  maxVol = 20
+  minVol = 0
+  reverse = False
 
 
   def __init__(self):
@@ -19,8 +23,11 @@ class Soundboard:
 
 
   def addListeners(self):
-    keyboard.add_hotkey( 'shift+z', lambda: self.changeSet(-1) )
-    keyboard.add_hotkey( 'shift+x', lambda: self.changeSet(1) )
+    keyboard.add_hotkey( 'shift+left', lambda: self.changeSet(-1) )
+    keyboard.add_hotkey( 'shift+right', lambda: self.changeSet(1) )
+    keyboard.add_hotkey( 'shift+up', lambda: self.changeVolume(1) )
+    keyboard.add_hotkey( 'ctrl+down', lambda: self.toggleReverse(False) )
+    keyboard.add_hotkey( 'ctrl+up', lambda: self.toggleReverse(True) )
 
 
   def loadSoundMap(self):
@@ -57,6 +64,18 @@ class Soundboard:
 
     self.loadSoundSet( self.sets[self.currentSetIndex] )
 
+  def changeVolume( self, dir ):
+    self.volumeModifier += dir
+    if (self.volumeModifier < self.minVol):
+      self.volumeModifier = self.minVol
+    elif (self.volumeModifier > self.maxVol):
+      self.volumeModifier = self.maxVol
+    print( self.volumeModifier )
+
+
+  def toggleReverse( self, reverseOn ):
+    self.reverse = reverseOn
+
 
   def buildFileName( self, setName, filename ):
     return self.soundDir + setName + '/' + filename
@@ -67,5 +86,10 @@ class Soundboard:
       sound = AudioSegment.from_wav(filename)
     else:
       sound = AudioSegment.from_mp3(filename)
+
+    sound = sound.apply_gain(self.volumeModifier)
+
+    if self.reverse:
+      sound = sound.reverse()
 
     play( sound )
