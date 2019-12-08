@@ -10,9 +10,9 @@ class Soundboard:
   soundDir = ''
   sets = []
   currentSetIndex = 0
-  volumeModifier = 5
-  maxVol = 20
-  minVol = 0
+  volumeModifier = 0
+  maxVol = 10
+  minVol = -10
   reverse = False
 
 
@@ -26,6 +26,7 @@ class Soundboard:
     keyboard.add_hotkey( 'shift+left', lambda: self.changeSet(-1) )
     keyboard.add_hotkey( 'shift+right', lambda: self.changeSet(1) )
     keyboard.add_hotkey( 'shift+up', lambda: self.changeVolume(1) )
+    keyboard.add_hotkey( 'shift+down', lambda: self.changeVolume(-1) )
     keyboard.add_hotkey( 'ctrl+down', lambda: self.toggleReverse(False) )
     keyboard.add_hotkey( 'ctrl+up', lambda: self.toggleReverse(True) )
 
