@@ -1,6 +1,9 @@
 import json
 import keyboard
+import os
+
 import pyttsx3
+
 from pydub import AudioSegment
 from pydub.playback import play
 
@@ -9,7 +12,7 @@ from models.soundset import SoundSet, SoundKey
 
 class Soundboard:
   tts = pyttsx3.init('sapi5', True) ### change to espeak or empty
-
+  scriptDir = ''
   soundDir = ''
   sets = []
   currentSetIndex = 0
@@ -18,8 +21,9 @@ class Soundboard:
   minVol = 0
   altMode = False
 
-
   def __init__(self):
+    self.scriptPath = os.path.dirname(os.path.realpath(__file__)) + '/'
+    print(self.scriptPath)
     self.loadSoundMap()
 
     self.tts.setProperty('volume', self.volumeModifier / self.maxVol)
@@ -43,10 +47,10 @@ class Soundboard:
 
 
   def loadSoundMap(self):
-    with open('assets/data/soundmap.json', 'r') as file:
+    with open(self.scriptPath + 'assets/data/soundmap.json', 'r') as file:
       soundMap = json.load(file)
 
-    self.soundDir = soundMap['soundDir']
+    self.soundDir = self.scriptPath + soundMap['soundDir']
     for soundSet in soundMap['sets']:
       self.sets.append( SoundSet(soundSet) )
 

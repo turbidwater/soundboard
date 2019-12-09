@@ -1,6 +1,7 @@
 from soundboard import Soundboard
 import keyboard
 import threading
+import os
 
 
 sound = Soundboard()
