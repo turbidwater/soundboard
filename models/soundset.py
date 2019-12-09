@@ -27,4 +27,6 @@ class SoundKey:
   def translate(self, obj):
     self.name = obj['name']
     self.key = obj['key']
-    self.file = obj['file']
+
+    if (bool(obj.get('file'))):
+      self.file = obj.get('file')
