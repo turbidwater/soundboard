@@ -4,7 +4,7 @@ import threading
 import os
 
 
-sound = Soundboard()
+# TODO uncomment sound = Soundboard()
 
 programEndRequested = threading.Event()
 
@@ -19,7 +19,7 @@ def main():
   thread = threading.Thread(target=listenForKeys)
   thread.start()
   programEndRequested.wait()
-  sound.playSound(os.path.dirname(os.path.realpath(__file__)) + '/assets/sounds/goodbye.mp3')
+  # TODO uncomment sound.playSound(os.path.dirname(os.path.realpath(__file__)) + '/assets/sounds/goodbye.mp3')
 
 if __name__ == '__main__':
-  main()
+  # TODO uncomment main()
