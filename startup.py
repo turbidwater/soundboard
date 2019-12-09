@@ -18,7 +18,8 @@ def main():
   thread = threading.Thread(target=listenForKeys)
   thread.start()
   programEndRequested.wait()
-  sound.playSound('assets/sounds/goodbye.mp3')
+  
+  sound.cleanUp()
 
 if __name__ == '__main__':
   main()

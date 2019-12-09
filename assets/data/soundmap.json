@@ -13,6 +13,11 @@
           "name": "Wak",
           "key": "w",
           "file": "wak.mp3"
+        },
+        {
+          "name": "Zoop",
+          "key": "z",
+          "file": "zoop.mp3"
         }
       ]
     },
@@ -28,6 +33,24 @@
           "name": "Wak",
           "key": "a",
           "file": "wak.mp3"
+        },
+        {
+          "name": "Dad",
+          "key": "d",
+          "file": "Dad.mp3"
+        }
+      ]
+    },
+    { 
+      "name": "Robot",
+      "sounds": [
+        {
+          "name": "wait",
+          "key": "w"
+        },
+        {
+          "name": "Albert Einstein is a friend.",
+          "key": "a"
         },
         {
           "name": "Dad",
