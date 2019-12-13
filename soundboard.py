@@ -27,6 +27,7 @@ class Soundboard:
     self.loadSoundMap()
 
     self.tts.setProperty('volume', self.volumeModifier / self.maxVol)
+    self.tts.setProperty('voice', self.tts.getProperty('voices')[0].id)
     self.tts.connect( 'error', self.onTTSError)
 
     self.tts.connect('started-utterance', self.onTTSStartUtterance)
