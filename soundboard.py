@@ -11,27 +11,30 @@ import assets.data.soundmap as soundmap
 from models.soundset import SoundSet, SoundKey 
 
 class Soundboard:
-  tts = pyttsx3.init('sapi5', True) ### change to espeak or empty
+  tts = pyttsx3.init() ### change to sapi5 or empty
   scriptDir = ''
   soundDir = ''
   sets = []
   currentSetIndex = 0
-  volumeModifier = 5
+  volumeModifier = -10
   maxVol = 20
-  minVol = 0
+  minVol = -20
   altMode = False
+  voiceWhitelist = ['english-us', 'french', 'english-north', 'en-scottish', 'english-rp', 'english-wmids', 'en-westindies', 'default']
 
   def __init__(self):
     self.scriptPath = os.path.dirname(os.path.realpath(__file__)) + '/'
-    print(self.scriptPath)
     self.loadSoundMap()
 
-    self.tts.setProperty('volume', self.volumeModifier / self.maxVol)
+    self.tts.setProperty('voice', self.voiceWhitelist[0])
+    self.tts.setProperty('volume', self.volumeModifier / (self.maxVol-self.minVol))
+    rate = self.tts.getProperty('rate')
+    self.tts.setProperty('rate', rate - 50)
     self.tts.connect( 'error', self.onTTSError)
 
-    self.tts.connect('started-utterance', self.onTTSStartUtterance)
-    self.tts.connect('started-word', self.onTTSStartWord)
-    self.tts.connect('finished-utterance', self.onTTSFinishedUtterance)
+    ### self.tts.connect('started-utterance', self.onTTSStartUtterance)
+    ### self.tts.connect('started-word', self.onTTSStartWord)
+    ### self.tts.connect('finished-utterance', self.onTTSFinishedUtterance)
     
     print('Soundboard initialized')
     self.addListeners()
@@ -91,13 +94,14 @@ class Soundboard:
     elif (self.volumeModifier > self.maxVol):
       self.volumeModifier = self.maxVol
 
-    self.tts.setProperty('volume', self.volumeModifier / self.maxVol)
+    self.tts.setProperty('volume', self.volumeModifier / (self.maxVol-self.minVol))
+    
 
   def toggleAltMode( self, altModeOn ):
     self.altMode = altModeOn
 
     voices = self.tts.getProperty('voices')
-    voice = voices[1].id if altModeOn else voices[0].id
+    voice = self.voiceWhitelist[1] if altModeOn else self.voiceWhitelist[0]
     self.tts.setProperty('voice', voice)
 
 
@@ -106,10 +110,8 @@ class Soundboard:
 
 
   def speakWord(self, word):
-    print('### speak ' + word)
     self.tts.say(word, word)
     self.tts.runAndWait()
-    print('### complete')
     self.tts.stop()
 
   def playSound( self, filename ): 
