@@ -67,7 +67,6 @@ class Soundboard:
     self.playSound( self.soundDir + 'loading.mp3' )
     self.playSound( self.buildFileName(soundSet.name, soundSet.name + '.mp3'))
     for sound in soundSet.soundKeys:
-      print('Hotkey for ' + sound.name + ' is ' + sound.key);
       try:
         if len(sound.file) > 0:
           keyboard.add_hotkey(sound.key, self.playSound, args=[self.buildFileName(soundSet.name, sound.file)]) 
