@@ -81,8 +81,7 @@
         {"name":"Once upon a time","key":"tab"},
         {"name":"Long ago, before humans walked the Earth","key":"caps lock"},
         {"name":"And so.","key":"enter"},
-        {"name":"Or","key":"shift"},
-        {"name":"He","key":"ctrl"},
+        
         {"name":"She","key":"alt"},
         {"name":"It","key":"space"},
         {"name":"But Suddenly!","key":"menu"},
