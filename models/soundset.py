@@ -30,3 +30,6 @@ class SoundKey:
 
     if (bool(obj.get('file'))):
       self.file = obj.get('file')
+
+    if (not bool(self.name) and bool(self.file)):
+      self.name = self.file.split('.')[0]
