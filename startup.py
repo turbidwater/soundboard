@@ -13,7 +13,7 @@ def listenForKeys():
   keyboard.on_release(onKey)
 
 def onKey(keyboardEvent):
-  print('{"name":"","key":"' + keyboardEvent.name + '"},')
+  print('{"name":"","key":"' + keyboardEvent.name + '", "code": "' + str(keyboardEvent.scan_code) + '"},')
 
 def endProgram(keyboardEvent):
   if (keyboard.is_pressed('ctrl')): 
