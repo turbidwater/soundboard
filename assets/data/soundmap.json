@@ -295,9 +295,9 @@
         {"name":"","key":"f7", "file":"alien_chatter3.mp3"},
         {"name":"","key":"f8", "file":"alien_chatter4.mp3"},
         
-        {"name":"","key":"f9", "file":"alien_bark.mp3"},
-        {"name":"","key":"f10", "file":"ticking.mp3"},
-        {"name":"","key":"f11", "file":"timer_alarm.mp3"},
+        {"name":"","key":"f9", "file":"ship_flyby6.mp3"},
+        {"name":"","key":"f10", "file":"ship_crash.mp3"},
+        {"name":"","key":"f11", "file":"ship_crash2.mp3"},
         {"name":"","key":"f12", "file":"ship_flyby7.mp3"},
         
         {"name":"Interaction","key":"`", "file":"interaction1.mp3"},

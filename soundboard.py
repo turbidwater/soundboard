@@ -11,7 +11,7 @@ import assets.data.soundmap as soundmap
 from models.soundset import SoundSet, SoundKey 
 
 class Soundboard:
-  tts = pyttsx3.init() ### change to sapi5 or empty
+  tts = pyttsx3.init() 
   scriptDir = ''
   soundDir = ''
   sets = []
