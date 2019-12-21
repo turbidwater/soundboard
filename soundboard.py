@@ -50,8 +50,6 @@ class Soundboard:
     keyboard.add_hotkey( 'ctrl+down', lambda: self.toggleAltMode(False) )
     keyboard.add_hotkey( 'ctrl+up', lambda: self.toggleAltMode(True) )
 
-    # TODO: combine sounds for Loading prompts
-    # TODO: add code to sound key model and use code if specified over name
     # TODO: add in queuing of sounds
   def loadSoundMap(self):
     with open(self.scriptPath + 'assets/data/soundmap.json', 'r') as file:
