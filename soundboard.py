@@ -71,10 +71,11 @@ class Soundboard:
     
     for sound in soundSet.soundKeys:
       try:
+        soundTrigger = sound.code if sound.code else sound.key;
         if len(sound.file) > 0:
-          keyboard.add_hotkey(sound.key, self.playSound, args=[self.buildFileName(soundSet.name, sound.file)]) 
+          keyboard.add_hotkey(soundTrigger, self.playSound, args=[self.buildFileName(soundSet.name, sound.file)]) 
         else:  
-          keyboard.add_hotkey(sound.key, self.speakWord, args=[sound.name]) 
+          keyboard.add_hotkey(soundTrigger, self.speakWord, args=[sound.name]) 
       except:
         print('Unable to load sound ' + sound.name + ' for ' + str(sound.key))
 
