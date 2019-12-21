@@ -50,7 +50,9 @@ class Soundboard:
     keyboard.add_hotkey( 'ctrl+down', lambda: self.toggleAltMode(False) )
     keyboard.add_hotkey( 'ctrl+up', lambda: self.toggleAltMode(True) )
 
-
+    # TODO: combine sounds for Loading prompts
+    # TODO: add code to sound key model and use code if specified over name
+    # TODO: add in queuing of sounds
   def loadSoundMap(self):
     with open(self.scriptPath + 'assets/data/soundmap.json', 'r') as file:
       soundMap = json.load(file)
@@ -66,6 +68,7 @@ class Soundboard:
     print( 'loading ' + soundSet.name )
     self.playSound( self.soundDir + 'loading.mp3' )
     self.playSound( self.buildFileName(soundSet.name, soundSet.name + '.mp3'))
+    
     for sound in soundSet.soundKeys:
       try:
         if len(sound.file) > 0:
@@ -73,7 +76,7 @@ class Soundboard:
         else:  
           keyboard.add_hotkey(sound.key, self.speakWord, args=[sound.name]) 
       except:
-        print('Unable to load sound ' + sound.name + ' for ' + sound.key)
+        print('Unable to load sound ' + sound.name + ' for ' + str(sound.key))
 
 
   def unloadSoundSet(self):
