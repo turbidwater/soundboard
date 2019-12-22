@@ -134,7 +134,10 @@ class Soundboard:
     if self.altMode:
       sound = sound.reverse()
 
-    play( sound )
+    try:
+      play( sound )
+    except:
+      print('There was an error trying to play the sound');
 
 
   def cleanUp(self):
