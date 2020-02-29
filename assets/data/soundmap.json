@@ -415,7 +415,7 @@
         {"name":"","key":"7", "code": 8, "file": "Seven.mp3"},
         {"name":"","key":"8", "code": 9, "file": "Eight.mp3"},
         {"name":"","key":"9", "code": 10, "file": "Nine.mp3"},
-        {"name":"","key":"0", "code": 11, "file": "Zero.mp3"},
+        {"name":"","key":"0", "code": 11, "file": "zero.mp3"},
         {"name":"","key":"−", "code": 12, "file": "WhatWasIGonnaSay.mp3"},
         {"name":"","key":"=", "code": 13, "file": "NonsenseSinging.mp3"},
         {"name":"","key":"backspace", "code": 14, "file": "Boogers.mp3"},
